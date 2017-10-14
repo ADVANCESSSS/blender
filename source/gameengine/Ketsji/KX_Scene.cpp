@@ -1312,7 +1312,7 @@ static void task_func(KX_GameObject *gameobj, double curtime)
 	if (!needs_update) {
 		// If we got here, we're looking to update an armature, so check its children meshes
 		// to see if we need to bother with a more expensive pose update
-		CListValue<KX_GameObject> *children = gameobj->GetChildren();
+		EXP_ListValue<KX_GameObject> *children = gameobj->GetChildren();
 
 		bool has_mesh = false, has_non_mesh = false;
 
@@ -1342,7 +1342,7 @@ static void task_func(KX_GameObject *gameobj, double curtime)
 	gameobj->UpdateActionManager(curtime, needs_update);
 
 	if (needs_update) {
-		CListValue<KX_GameObject> *children = gameobj->GetChildren();
+		EXP_ListValue<KX_GameObject> *children = gameobj->GetChildren();
 		KX_GameObject *parent = gameobj->GetParent();
 
 		// Only do deformers here if they are not parented to an armature, otherwise the armature will

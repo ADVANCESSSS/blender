@@ -32,11 +32,9 @@ set(INC_SYS
 )
 
 set(SRC
-	Atomics.h
 	LockLessMultiReadPipe.h
 	TaskScheduler.h
 	TaskScheduler_c.h
-	Threads.h
 
 	TaskScheduler.cpp
 	TaskScheduler_c.cpp
