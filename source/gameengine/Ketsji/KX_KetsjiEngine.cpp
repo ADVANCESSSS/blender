@@ -187,7 +187,7 @@ KX_KetsjiEngine::KX_KetsjiEngine(KX_ISystem *system)
 	m_pyprofiledict = PyDict_New();
 #endif
 
-	m_taskscheduler = BLI_task_scheduler_create(TASK_SCHEDULER_AUTO_THREADS);
+	m_taskScheduler.Initialize();
 
 	m_scenes = new EXP_ListValue<KX_Scene>();
 }
@@ -200,9 +200,6 @@ KX_KetsjiEngine::~KX_KetsjiEngine()
 #ifdef WITH_PYTHON
 	Py_CLEAR(m_pyprofiledict);
 #endif
-
-	if (m_taskscheduler)
-		BLI_task_scheduler_free(m_taskscheduler);
 
 	m_scenes->Release();
 }

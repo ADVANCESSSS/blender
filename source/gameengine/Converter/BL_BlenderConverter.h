@@ -34,6 +34,7 @@
 
 #include <map>
 #include <vector>
+#include <mutex>
 
 #ifdef _MSC_VER // MSVC doesn't support incomplete type in std::unique_ptr.
 #  include "KX_BlenderMaterial.h"
@@ -41,8 +42,6 @@
 
 #  include "BL_BlenderScalarInterpolator.h"
 #endif
-
-#include "CM_Thread.h"
 
 class EXP_StringValue;
 class BL_BlenderSceneConverter;
@@ -61,7 +60,6 @@ struct Material;
 struct bAction;
 struct bActuator;
 struct bController;
-struct TaskPool;
 
 template<class Value>
 using UniquePtrList = std::vector<std::unique_ptr<Value> >;
@@ -88,14 +86,12 @@ private:
 
 	std::map<KX_Scene *, SceneSlot> m_sceneSlots;
 
-	struct ThreadInfo {
-		TaskPool *m_pool;
-		CM_ThreadMutex m_mutex;
-	} m_threadinfo;
-
 	// Saved KX_LibLoadStatus objects
 	std::map<std::string, KX_LibLoadStatus *> m_status_map;
-	std::vector<KX_LibLoadStatus *> m_mergequeue;
+
+	std::vector<enki::ITaskSet *> m_activeConvertTasks;
+	std::vector<enki::ITaskSet *> m_finishedConvertTasks;
+	std::mutex m_mergeMutex;
 
 	Main *m_maggie;
 	std::vector<Main *> m_DynamicMaggie;
@@ -152,7 +148,7 @@ public:
 
 	void MergeAsyncLoads();
 	void FinalizeAsyncLoads();
-	void AddScenesToMergeQueue(KX_LibLoadStatus *status);
+	void NotifyFinishedConvertTask(enki::ITaskSet *task);
 
 	void PrintStats();
 

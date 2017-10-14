@@ -145,6 +145,7 @@ endif()
 		bf_intern_iksolver
 		bf_intern_smoke
 		bf_intern_moto
+		bf_intern_enkits
 		bf_intern_guardedalloc
 		bf_intern_memutil
 		bf_intern_utfconv

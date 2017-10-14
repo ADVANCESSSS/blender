@@ -305,9 +305,6 @@ protected:
 
 	KX_ObstacleSimulation* m_obstacleSimulation;
 
-	AnimationPoolData m_animationPoolData;
-	TaskPool *m_animationPool;
-
 	/**
 	 * LOD Hysteresis settings
 	 */

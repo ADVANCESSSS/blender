@@ -44,7 +44,8 @@
 #include "RAS_Rasterizer.h"
 #include <vector>
 
-struct TaskScheduler;
+#include "TaskScheduler.h"
+
 class KX_ISystem;
 class BL_BlenderConverter;
 class KX_NetworkMessageManager;
@@ -259,7 +260,7 @@ private:
 	GlobalSettings m_globalsettings;
 
 	/// Task scheduler for multi-threading
-	TaskScheduler *m_taskscheduler;
+	enki::TaskScheduler m_taskScheduler;
 
 	/** Set scene's total pause duration for animations process.
 	 * This is done in a separate loop to get the proper state of each scenes.
@@ -343,9 +344,9 @@ public:
 		return m_networkMessageManager;
 	}
 
-	TaskScheduler *GetTaskScheduler()
+	enki::TaskScheduler& GetTaskScheduler()
 	{
-		return m_taskscheduler;
+		return m_taskScheduler;
 	}
 
 	/// returns true if an update happened to indicate -> Render

@@ -68,6 +68,7 @@ endif()
 
 if(WITH_GAMEENGINE)
 	add_subdirectory(moto)
+	add_subdirectory(enkiTS)
 endif()
 
 if(WITH_CYCLES)

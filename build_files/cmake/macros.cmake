@@ -649,6 +649,7 @@ function(SETUP_BLENDER_SORTED_LIBS)
 		bf_intern_ctr
 		bf_intern_utfconv
 		bf_intern_smoke
+		bf_intern_enkits
 		bf_intern_moto
 		bf_intern_opencolorio
 		bf_intern_eigen
